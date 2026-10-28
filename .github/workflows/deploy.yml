@@ -16,4 +16,4 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ВАШ_ЛОГИН_DOCKER/omniroute:latest
+        tags: britan88/omniroute:latest
