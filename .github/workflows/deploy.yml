@@ -1,19 +1,24 @@
 name: Build and Push Docker Image
+
 on:
   push:
-    branches: [ main ]
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Эта строчка добавляет кнопку ручного запуска
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: britan88/omniroute:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/omniroute:latest
